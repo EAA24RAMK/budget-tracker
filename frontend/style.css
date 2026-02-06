@@ -1,0 +1,420 @@
+/* =====================
+   MODERN BANKING UI - THEME VARIABLES
+===================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --bg-color: #f2f4f8; /* Soft light gray/blueish tint */
+    --text-main: #111827; /* Near black for primary text */
+    --text-secondary: #6b7280; /* Gray for secondary text */
+    --accent-color: #000000; /* Bold black for primary actions */
+    --accent-hover: #222222;
+    --success-color: #10b981; /* Green for Income */
+    --danger-color: #ef4444; /* Red for Expense */
+    --glass-bg: rgba(255, 255, 255, 0.75);
+    --glass-border: rgba(255, 255, 255, 0.4);
+    --shadow-soft: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+    --shadow-hover: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 12px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: var(--font-family);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    padding: 20px;
+    /* Soft ambient background gradient blob */
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(216, 241, 255, 0.6) 0%, transparent 25%),
+        radial-gradient(circle at 90% 80%, rgba(220, 220, 255, 0.6) 0%, transparent 25%);
+    background-attachment: fixed;
+}
+
+/* =====================
+   UTILITIES & COMPONENTS
+===================== */
+h1, h2, h3 {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text-main);
+}
+
+h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+h2 { font-size: 1.25rem; margin-bottom: 1rem; }
+
+button {
+    cursor: pointer;
+    font-family: var(--font-family);
+    font-weight: 600;
+    border: none;
+    transition: all 0.2s ease;
+    border-radius: var(--radius-sm);
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+/* Primary Button (Black) */
+.btn-primary {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 16px 24px;
+    font-size: 1rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    width: 100%;
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-hover);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    transform: translateY(-1px);
+}
+
+/* Secondary Button (Ghost/Light) */
+.btn-secondary {
+    background-color: transparent;
+    color: var(--text-secondary);
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    width: auto;
+}
+.btn-secondary:hover {
+    background-color: rgba(0,0,0,0.05);
+    color: var(--text-main);
+}
+
+/* Inputs */
+input, select {
+    width: 100%;
+    padding: 16px;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(0,0,0,0.08);
+    background: rgba(255,255,255,0.8);
+    font-family: var(--font-family);
+    font-size: 1rem;
+    transition: all 0.2s;
+    margin-bottom: 15px;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(0,0,0,0.05);
+}
+
+/* Glass Card */
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+    padding: 24px;
+    margin-bottom: 24px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* =====================
+   LAYOUT
+===================== */
+.container {
+    max-width: 500px; /* Mobile-first/Single focus */
+    margin: 0 auto;
+    padding-bottom: 80px;
+}
+
+/* Header */
+header {
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.25rem;
+    font-weight: 800;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.avatar {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, #f0f0f0, #ffffff);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.8rem;
+    color: var(--text-main);
+    box-shadow: var(--shadow-soft);
+    border: 1px solid white;
+}
+
+/* Auth Screens (Centered) */
+#login-section, #signup-section {
+    max-width: 400px;
+    margin: 10vh auto;
+    text-align: center;
+}
+
+.auth-header {
+    margin-bottom: 30px;
+}
+.auth-header h2 { font-size: 1.75rem; }
+.auth-header p { color: var(--text-secondary); }
+
+/* Summary Section (Cards) */
+.summary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Balance spans 2, others 1 */
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.balance-card {
+    grid-column: span 2;
+    background: linear-gradient(135deg, #111827, #000000);
+    color: white;
+    box-shadow: 0 15px 40px -10px rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Shine effect on balance card */
+.balance-card::after {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.balance-card .label { color: rgba(255,255,255,0.6); font-size: 0.9rem; margin-bottom: 8px; font-weight: 500;}
+.balance-card .amount { font-size: 2.5rem; font-weight: 800; letter-spacing: -1px; }
+
+.stat-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.stat-card .label { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 4px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+.stat-card .amount { font-size: 1.25rem; font-weight: 700; }
+.stat-card.income .amount { color: var(--success-color); }
+.stat-card.expense .amount { color: var(--danger-color); }
+
+/* Transactions List */
+.transaction-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 16px;
+}
+
+.transaction-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.transaction-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px;
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255,255,255,0.5);
+    transition: background 0.2s, transform 0.2s;
+    cursor: default;
+}
+
+.transaction-item:hover {
+    background: rgba(255, 255, 255, 0.9);
+    transform: scale(1.01);
+}
+
+.t-left { display: flex; align-items: center; gap: 16px; }
+
+.t-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.t-details { display: flex; flex-direction: column; }
+.t-category { font-weight: 600; font-size: 1rem; color: var(--text-main); }
+.t-date { font-size: 0.8rem; color: var(--text-secondary); }
+
+.t-right { text-align: right; }
+.t-amount { font-weight: 700; font-size: 1rem; }
+.t-amount.income { color: var(--success-color); }
+.t-amount.expense { color: var(--text-main); }
+
+.delete-btn {
+    background: none;
+    border: none;
+    color: #d1d5db;
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 4px;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+}
+.delete-btn:hover { color: var(--danger-color); }
+
+
+/* FAB (Floating Action Button) - Bottom Center or Sticky */
+.fab-container {
+    margin: 30px 0;
+    text-align: center;
+}
+
+.add-btn-large {
+    width: 100%;
+    padding: 20px;
+    border-radius: var(--radius-lg);
+    background: var(--text-main);
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.add-btn-large:hover { 
+    transform: translateY(-4px); 
+    box-shadow: 0 15px 35px rgba(0,0,0,0.25); 
+    background-color: black;
+}
+
+.add-icon { font-size: 1.5rem; line-height: 0; }
+
+/* Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: flex-end; /* Mobile: slide up from bottom */
+    justify-content: center;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal-content {
+    background: #fcfcfc;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 32px 32px 0 0;
+    padding: 32px;
+    box-shadow: 0 -10px 60px rgba(0,0,0,0.15);
+    transform: translateY(100%);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (min-width: 600px) {
+    .modal-overlay { align-items: center; }
+    .modal-content { border-radius: 32px; transform: translateY(40px); }
+}
+
+.modal-overlay.active .modal-content {
+    transform: translateY(0);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+.close-modal {
+    background: #f3f4f6;
+    border-radius: 50%;
+    width: 32px; height: 32px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+}
+
+/* Charts Toggle */
+.charts-section {
+    margin-top: 40px;
+}
+
+.charts-toggle {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.btn-charts {
+    background: white;
+    padding: 10px 20px;
+    border-radius: 50px;
+    box-shadow: var(--shadow-soft);
+    font-size: 0.9rem;
+    color: var(--text-main);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.charts-content {
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+.charts-content.active { display: block; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Helper Text */
+.form-label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-secondary);
+}

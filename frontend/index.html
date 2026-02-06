@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- AUTH: LOGIN -->
+        <div id="login-section">
+            <div class="auth-header">
+                <h1>Velkommen tilbage</h1>
+                <p>Log ind for at se dit budget</p>
+            </div>
+
+            <div class="glass-card">
+                <input type="email" id="login-email" placeholder="Email adresse" required>
+                <input type="password" id="login-password" placeholder="Kodeord" required>
+                <button class="btn-primary" onclick="doLogin()">Log ind</button>
+            </div>
+
+            <p id="login-error" style="color: var(--danger-color); margin-top: 10px;"></p>
+
+            <button class="btn-secondary" onclick="showSignup()">Opret ny konto</button>
+        </div>
+
+        <!-- AUTH: SIGNUP -->
+        <div id="signup-section" style="display: none;">
+            <div class="auth-header">
+                <h1>Opret konto</h1>
+                <p>Start din økonomiske rejse i dag</p>
+            </div>
+
+            <div class="glass-card">
+                <input type="email" id="signup-email" placeholder="Email adresse" required>
+                <input type="password" id="signup-password" placeholder="Vælg kodeord" required>
+                <button class="btn-primary" onclick="doSignup()">Opret bruger</button>
+            </div>
+
+            <p id="signup-error" style="color: var(--danger-color); margin-top: 10px;"></p>
+
+            <button class="btn-secondary" onclick="showLogin()">Har du allerede en konto? Log ind</button>
+        </div>
+
+        <!-- APP DASHBOARD -->
+        <div id="app-section" style="display: none;">
+
+            <!-- Header -->
+            <header>
+                <div class="user-profile">
+                    <div class="avatar"><i class="fas fa-user"></i></div>
+                    <span>Mit Budget</span>
+                </div>
+                <button class="btn-secondary" onclick="doLogout()"><i class="fas fa-sign-out-alt"></i></button>
+            </header>
+
+            <!-- Summary Cards -->
+            <div class="summary-grid">
+                <div class="balance-card glass-card">
+                    <div class="label">Nuværende Saldo</div>
+                    <div class="amount" id="balance-display">0 kr.</div>
+                </div>
+                <div class="stat-card glass-card income">
+                    <div class="label"><i class="fas fa-arrow-down"></i> Indtægter</div>
+                    <div class="amount" id="income-display">0 kr.</div>
+                </div>
+                <div class="stat-card glass-card expense">
+                    <div class="label"><i class="fas fa-arrow-up"></i> Udgifter</div>
+                    <div class="amount" id="expense-display">0 kr.</div>
+                </div>
+            </div>
+
+            <!-- Main Action -->
+            <div class="fab-container">
+                <button class="add-btn-large" onclick="openModal()">
+                    <span class="add-icon">+</span> Tilføj ny post
+                </button>
+            </div>
+
+            <!-- Transactions -->
+            <div class="transaction-header">
+                <h2>Seneste poster</h2>
+                <div class="controls">
+                    <!-- Simple month filter could go here later -->
+                    <input type="month" id="monthFilter" onchange="applyMonthFilter()"
+                        style="padding: 8px; width: auto; margin:0; font-size: 0.9rem;">
+                </div>
+            </div>
+
+            <div id="expenses" class="transaction-list">
+                <!-- Items injected via JS -->
+            </div>
+
+            <!-- Charts Toggle -->
+            <div class="charts-section">
+                <div class="charts-toggle">
+                    <button class="btn-charts" onclick="toggleCharts()">
+                        <i class="fas fa-chart-pie"></i> Vis Analyse
+                    </button>
+                </div>
+
+                <div id="charts-container" class="charts-content">
+                    <div class="glass-card">
+                        <h3>Pr. Kategori</h3>
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+                    <div class="glass-card">
+                        <h3>Udvikling</h3>
+                        <canvas id="balanceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ADD EXPENSE MODAL -->
+    <div id="add-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Tilføj post</h2>
+                <div class="close-modal" onclick="closeModal()">✕</div>
+            </div>
+
+            <form id="expense-form">
+                <label class="form-label">Beløb</label>
+                <input type="number" step="0.01" id="amount" placeholder="0.00" required autofocus>
+
+                <label class="form-label">Type</label>
+                <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                    <select id="type" style="margin-bottom: 0;">
+                        <option value="expense">Udgift</option>
+                        <option value="income">Indtægt</option>
+                    </select>
+                </div>
+
+                <label class="form-label">Kategori</label>
+                <input type="text" id="category" placeholder="F.eks. Mad, Transport, Løn">
+
+                <label class="form-label">Beskrivelse (valgfri)</label>
+                <input type="text" id="description" placeholder="Notat...">
+
+                <label class="form-label">Dato</label>
+                <input type="date" id="date" required>
+
+                <button type="submit" class="btn-primary mt-4">Gem post</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="module" src="app.js"></script>
+
+    <script>
+        // Modal & Toggle Logic that connects UI to JS
+        function openModal() {
+            document.getElementById('add-modal').classList.add('active');
+            // Set default date to today
+            document.getElementById('date').valueAsDate = new Date();
+        }
+        function closeModal() {
+            document.getElementById('add-modal').classList.remove('active');
+        }
+        // Close modal on outside click
+        document.getElementById('add-modal').addEventListener('click', function (e) {
+            if (e.target === this) closeModal();
+        });
+
+        function toggleCharts() {
+            const container = document.getElementById('charts-container');
+            container.classList.toggle('active');
+        }
+    </script>
+</body>
+
+</html>
