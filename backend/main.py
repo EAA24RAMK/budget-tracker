@@ -22,7 +22,6 @@ app.add_middleware(
 
 Base.metadata.create_all(bind=engine)
 
-# Root endpoint til at tjekke om API'en kører
 @app.get("/")
 def root():
     return {"message": "Budget Tracker API is running"}
@@ -40,7 +39,7 @@ def create_expense(
     db.refresh(new_expense)
     return new_expense
 
-# Henter alle udgifter for en bruger, evt. filtreret på måned
+# Henter alle udgifter for en bruger evt. filtreret på måned
 @app.get("/expenses", response_model=list[ExpenseResponse])
 def get_expenses(
     month: str | None = None,

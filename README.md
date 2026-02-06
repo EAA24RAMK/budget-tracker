@@ -1,6 +1,6 @@
 # Budget Tracker
 
-En moderne og minimalistisk webapplikation til at holde styr på din personlige økonomi. Bygget med **Python (FastAPI)** backend og **Vanilla JavaScript** frontend med et "Glassmorphism" design.
+En simpel webapp til at holde styr på ens personlige økonomi. Bygget med **Python (FastAPI)** backend og **Vanilla JavaScript** frontend.
 
 ## Funktionalitet
 
@@ -14,8 +14,8 @@ En moderne og minimalistisk webapplikation til at holde styr på din personlige 
 
 ## Teknologier
 
-- **Backend**: Python 3.10+, FastAPI, SQLAlchemy, SQLite, Passlib (Argon2 kryptering).
-- **Frontend**: HTML5, CSS3 (Glassmorphism), JavaScript (ES6+), Chart.js.
+- **Backend**: Python 3.13, FastAPI, SQLAlchemy, SQLite, Passlib (Argon2 kryptering).
+- **Frontend**: HTML, CSS, JavaScript, Chart.js.
 
 ## Installation
 
@@ -41,6 +41,8 @@ En moderne og minimalistisk webapplikation til at holde styr på din personlige 
 
 4.  **Åben Frontend:**
     Åben `frontend/index.html` direkte i din browser, eller brug "Live Server" extension i VS Code.
+
+    Evt. brug python -m http.server 5050 i frontend mappen, til at starte frontend serveren, hvis det ikke virker.
 
 ## Sikkerhed
 
